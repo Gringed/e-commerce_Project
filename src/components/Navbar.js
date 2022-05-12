@@ -3,7 +3,8 @@ import { Badge } from '@mui/material';
 import React from "react";
 import styled from "styled-components";
 
-const PrimaryColor = "#333333";
+const PrimaryColor = "white";
+const SecondaryColor = "pink";
 const Container = styled.div`
   height: 60px;
   color: ${PrimaryColor};
@@ -30,14 +31,16 @@ const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: 20px;
-  padding: 5px;
-  border: 1px solid ${PrimaryColor};
+  padding: 5px 15px;
+  border: 2px solid ${SecondaryColor};
   border-radius: 10px;
 `;
 const Input = styled.input`
   border: none;
   padding: 10px;
   font-family: 'Montserrat', sans-serif;
+  background:none;
+  color: ${PrimaryColor};
   &:focus {
     outline: none;
   }
@@ -57,11 +60,16 @@ const Right = styled.div`
   flex: 1;
   text-align: right;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
+  align-items: center;
 `;
 const MenuItem = styled.div`
     font-size: 14px;
+    margin-left: 25px;
     cursor: pointer;
+    &:hover {
+        color: ${SecondaryColor};
+    }
 `
 
 const Navbar = () => {
