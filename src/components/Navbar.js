@@ -6,7 +6,7 @@ import styled from "styled-components";
 const PrimaryColor = "white";
 const SecondaryColor = "pink";
 const Container = styled.div`
-  height: 60px;
+  
   color: ${PrimaryColor};
 `;
 
@@ -58,7 +58,7 @@ const Logo = styled.h1`
 `;
 const Right = styled.div`
   flex: 1;
-  text-align: right;
+  text-align: center;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -84,7 +84,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>MONEY.D.ENGINE</Logo>
+          <Logo>MOONEY</Logo>
         </Center>
         <Right>
         <MenuItem>
