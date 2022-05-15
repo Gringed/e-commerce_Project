@@ -5,8 +5,10 @@ import styled from "styled-components";
 
 const PrimaryColor = "white";
 const SecondaryColor = "pink";
+const TertiaryColor = "#18191a";
+
 const Container = styled.div`
-  
+  background: ${TertiaryColor};
   color: ${PrimaryColor};
 `;
 
@@ -15,6 +17,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-transform: uppercase;
 `;
 
 const Left = styled.div`
@@ -54,7 +57,7 @@ const Center = styled.div`
 
 const Logo = styled.h1`
   color: ${PrimaryColor};
-  border-bottom: 5px solid pink;
+  border-bottom: 5px solid ${SecondaryColor};
 `;
 const Right = styled.div`
   flex: 1;
@@ -84,14 +87,14 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>MOONEY</Logo>
+          <Logo>Mooney</Logo>
         </Center>
         <Right>
         <MenuItem>
-            REGISTER
+            Register
         </MenuItem>
         <MenuItem>
-            LOGIN
+            Login
         </MenuItem>
         <MenuItem>
         <Badge badgeContent={4} color="error">

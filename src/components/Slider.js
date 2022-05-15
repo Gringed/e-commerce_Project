@@ -8,7 +8,7 @@ const SecondaryColor = "pink";
 const TertiaryColor = "#18191a";
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,6 +31,11 @@ const Arrow = styled.div`
   cursor: pointer;
   opacity: 0.7;
   z-index: 1;
+  transition: all 0.2s ease-in;
+    &:hover{
+        color: ${SecondaryColor};
+        background: ${TertiaryColor};
+    }
 `;
 
 const Wrapper = styled.div`
@@ -54,8 +59,8 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 100%;
-  width: 100%;
+  height: 90%;
+  width: 90%;
   object-fit: contain;
 `;
 const InfoContainer = styled.div`
@@ -79,6 +84,12 @@ const Button = styled.button`
   cursor: pointer;
   background: none;
   color: ${TertiaryColor};
+  transition: all 0.2s ease-in;
+    &:hover{
+        color: ${SecondaryColor};
+        background: ${TertiaryColor};
+        border: 2px solid ${TertiaryColor};
+    }
 `;
 
 const Slider = () => {
