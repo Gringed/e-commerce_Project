@@ -1,6 +1,7 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 import React from 'react'
 import styled from 'styled-components'
+import { mobile } from '../responsive';
 
 const PrimaryColor = "whitesmoke";
 const SecondaryColor = "pink";
@@ -16,6 +17,7 @@ const Container = styled.div`
   align-items: center;
   background: ${PrimaryColor};
   position: relative;
+  ${mobile({margin: "5px 0 5px 0"})}
 `;
 const Circle = styled.div`
   width: 200px;

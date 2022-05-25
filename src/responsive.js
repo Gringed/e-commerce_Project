@@ -15,3 +15,11 @@ export const tablet = (props) => {
         }
     `
 }
+
+export const laptopS = (props) => {
+    return css`
+        @media (min-width: 769px) and (max-width: 1024px){
+            ${props}
+        }
+    `
+}

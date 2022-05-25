@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
+import { mobile, tablet } from '../responsive'
 
 const PrimaryColor = "white";
 const SecondaryColor = "pink";
@@ -14,6 +15,8 @@ const Wrapper = styled.div`
     padding: 50px;
     display: flex;
     color: ${TertiaryColor};
+    ${mobile({flexDirection: "column", padding: "5px"})}
+    ${tablet({flexDirection: "column", padding: "15px"})}
 `
 const ImgContainer = styled.div`
     flex: 1;
@@ -26,9 +29,11 @@ const Image = styled.img`
 const InfoContainer = styled.div`
     flex:1;
     padding: 0 50px;
+    ${mobile({padding: "5px"})}
 `
 const Title = styled.h1`
     font-size: 30px;
+    ${mobile({textAlign: "center"})}
 `
 const Description = styled.p`
     text-align: justify;
@@ -42,6 +47,8 @@ const FilterContainer = styled.div`
     justify-content: space-between;
     width: 60%;
     margin: 30px 0;
+    ${mobile({width: "100%"})}
+    ${tablet({width: "100%"})}
 `
 
 const Filter = styled.div`
@@ -80,6 +87,8 @@ const AddContainer = styled.div`
     align-items: center;
     width: 60%;
     justify-content: space-between;
+    ${mobile({width: "100%"})}
+    ${tablet({width: "100%"})}
 `
 const AmountContainer = styled.div`
     display: flex;

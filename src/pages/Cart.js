@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { mobile, tablet } from "../responsive";
 
 const PrimaryColor = "whitesmoke";
 const SecondaryColor = "pink";
@@ -36,8 +37,12 @@ const TopButton = styled.button`
     background: ${TertiaryColor};
     border: 2px solid ${TertiaryColor};
   }
+  ${mobile({margin: "0 5px 0 5px"})}
 `;
-const TopTexts = styled.div``;
+const TopTexts = styled.div`
+    ${mobile({display: "none"})}
+    ${tablet({fontSize: "12px"})}
+`;
 const TopText = styled.span`
   cursor: pointer;
   margin: 0 10px;
@@ -47,6 +52,8 @@ const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+  ${mobile({flexDirection: "column"})}
+  ${tablet({flexDirection: "column"})}
 `;
 const Info = styled.div`
   flex: 3;
@@ -59,9 +66,12 @@ const Product = styled.div`
 const ProductDetails = styled.div`
   flex: 2;
   display: flex;
+  ${mobile({alignItems: "center"})}
 `;
 const Image = styled.img`
   width: 200px;
+  ${mobile({width: "50px", height: "50px"})}
+  ${tablet({width: "150px", height: "150px"})}
 `;
 const Details = styled.div`
   display: flex;

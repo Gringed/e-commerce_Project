@@ -4,6 +4,7 @@ import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
 import Products from '../components/Products'
+import { mobile } from '../responsive'
 
 const PrimaryColor = "white";
 const SecondaryColor = "pink";
@@ -19,18 +20,21 @@ const FilterContainer = styled.div`
 `
 const Filter = styled.div`
   margin: 20px;
+  ${mobile({display: "flex", flexDirection: "column"})}
 `
 
 const FilterText = styled.div`
   font-weight: 600;
   font-size: 20px;
   margin: 5px;
+  ${mobile({fontSize: "15px"})}
 `
 const Select = styled.select`
   padding: 10px;
   margin: 5px;
   border: 2px solid ${SecondaryColor};
   font-family: 'Montserrat', sans-serif;
+  ${mobile({margin: "5px 0 5px 0", padding: "10px 5px 10px 5px"})}
 `
 const Option = styled.option`
   color: ${TertiaryColor};

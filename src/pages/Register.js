@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { laptopS, mobile, tablet } from "../responsive";
 
 const PrimaryColor = "whitesmoke";
 const SecondaryColor = "pink";
@@ -20,12 +21,16 @@ const Wrapper = styled.div`
   width: 40%;
   padding: 20px;
   background: ${PrimaryColor};
+  ${mobile({width: "80%"})}
+  ${tablet({width: "70%"})}
+  ${laptopS({width: "55%"})}
 `;
 const Logo = styled.h1`
   color: ${PrimaryColor};
   border-bottom: 5px solid ${SecondaryColor};
   font-size: 45px;
   width: fit-content;
+  ${mobile({fontSize: "25px", textAlign: "center"})}
 `;
 
 const Span = styled.span`
