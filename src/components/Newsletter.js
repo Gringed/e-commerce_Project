@@ -1,6 +1,7 @@
 import { Send } from '@mui/icons-material'
 import React from 'react'
 import styled from 'styled-components'
+import { mobile, tablet } from '../responsive';
 
 const PrimaryColor = "whitesmoke";
 const SecondaryColor = "pink";
@@ -21,11 +22,14 @@ const Title = styled.h1`
     font-size: 70px;
     border-bottom: 5px solid ${SecondaryColor};
     color: ${TertiaryColor};
+    ${mobile({fontSize: "50px"})}
 `
 const Description = styled.div`
     font-size: 24px;
     letter-spacing: 2px;
     font-weight: 200;
+    ${mobile({textAlign: "center"})}
+    ${tablet({textAlign: "center"})}
 `
 const InputContainer = styled.div`
     width: 50%;
@@ -33,6 +37,8 @@ const InputContainer = styled.div`
     display: flex;
     justify-content: center;
     margin: 20px;
+    ${mobile({width: "90%"})}
+    ${tablet({width: "90%"})}
 `
 const Input = styled.input`
     font-family: 'Montserrat',sans-serif;

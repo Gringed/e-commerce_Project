@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { categories } from "../data";
+import { mobile, tablet } from "../responsive";
 
 const PrimaryColor = "white";
 const SecondaryColor = "pink";
@@ -10,6 +11,8 @@ const Container = styled.div`
   display: flex;
   padding: 20px;
   justify-content: space-between;
+  ${mobile({padding: "0", flexDirection: "column"})}
+  ${tablet({padding: "0", flexDirection: "column"})}
 `;
 
 const Item = styled.div`
@@ -24,6 +27,8 @@ const Image = styled.img`
 width: 100%;
 height: 100%;
 object-fit: cover;
+${mobile({height: "25vh"})}
+${tablet({height: "50vh"})}
 `;
 const InfoContainer = styled.div`
     position: absolute;
@@ -39,13 +44,15 @@ const InfoContainer = styled.div`
     
 `;
 const Title = styled.h1`
-  font-size: 40px;
+  font-size: 35px;
   text-transform: uppercase;
   color: ${TertiaryColor};
   background: ${PrimaryColor};
   width:100%;
   opacity: 0.75;
   padding: 10px 0;
+  ${mobile({fontSize: "25px"})}
+  ${tablet({fontSize: "30px"})}
 `;
 const Button = styled.button`
     padding: 15px;

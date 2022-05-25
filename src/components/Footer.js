@@ -1,6 +1,7 @@
 import { Facebook, Instagram, LinkedIn, Mail, Phone, Room, Twitter } from "@mui/icons-material";
 import React from "react";
 import styled from "styled-components";
+import { mobile, tablet } from "../responsive";
 
 const PrimaryColor = "whitesmoke";
 const SecondaryColor = "pink";
@@ -9,6 +10,8 @@ const TertiaryColor = "#18191a";
 const Container = styled.div`
   display: flex;
   background: ${TertiaryColor};
+  ${mobile({flexDirection: "column"})}
+  ${tablet({flexDirection: "column"})}
 `;
 const Left = styled.div`
   flex: 1;
@@ -56,6 +59,8 @@ const Center = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  ${mobile({display: "none"})}
+  ${tablet({display: "none"})}
 `;
 
 const Title = styled.h3`
