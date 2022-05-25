@@ -17,14 +17,14 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Wrapper = styled.div`
-  width: 40%;
+  width: 30%;
   padding: 20px;
   background: ${PrimaryColor};
 `;
 const Logo = styled.h1`
   color: ${PrimaryColor};
   border-bottom: 5px solid ${SecondaryColor};
-  font-size: 45px;
+  font-size: 40px;
   width: fit-content;
 `;
 
@@ -41,7 +41,7 @@ const Title = styled.h1`
 `;
 const Form = styled.form`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 `;
 const Input = styled.input`
   flex: 1;
@@ -57,67 +57,68 @@ const Input = styled.input`
     box-shadow: 0 0 5px 2px ${SecondaryColor};
   }
 `;
-const Agreement = styled.span`
+
+const Button = styled.button`
+  padding: 15px;
+  font-family: "Montserrat", sans-serif;
+  background: none;
+  border: 2px solid ${SecondaryColor};
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease-in;
+  &:hover {
+    color: ${SecondaryColor};
+    background: ${TertiaryColor};
+    border: 2px solid ${TertiaryColor};
+  }
+`;
+
+const Link = styled.a`
   font-size: 13px;
   margin: 20px 0;
   color: ${TertiaryColor};
-  & > b {
+  width: fit-content;
+  text-decoration: none;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  &:hover {
     color: ${SecondaryColor};
-    font-size: 15px;
+    text-decoration: underline;
   }
 `;
-const Button = styled.button`
 
-  padding: 15px;
-    font-family: 'Montserrat', sans-serif;
-    background: none;
-    border: 2px solid ${SecondaryColor};
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.2s ease-in;
-    &:hover{
-        color: ${SecondaryColor};
-        background: ${TertiaryColor};
-        border: 2px solid ${TertiaryColor};
-    }
-`;
-
-const Connexion = styled.a`
+const Inscription = styled.a`
   color: ${TertiaryColor};
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease-in;
   font-size: 20px;
-  &:hover{
-        color: ${SecondaryColor};
-        font-size: 25px;
-    }
-`
+  cursor: pointer;
+  &:hover {
+    color: ${SecondaryColor};
+    font-size: 25px;
+  }
+`;
 
-const Register = () => {
+const Login = () => {
   return (
     <Container>
       <Logo>
-        Mooney | <Span>Inscription</Span>
+        Mooney | <Span>Connexion</Span>
       </Logo>
       <Wrapper>
-        <Title>Inscription | <Connexion href="">Se connecter</Connexion></Title>
+        <Title>
+          Connexion | <Inscription>Créer un compte</Inscription>
+        </Title>
         <Form>
-          <Input placeholder="Prénom" />
-          <Input placeholder="Nom" />
           <Input placeholder="E-mail" type="email" required />
-          <Input placeholder="Pseudo" type="text" />
           <Input placeholder="Mot de passe" type="password" />
-          <Input placeholder="Confirmation de mot de passe" type="password" />
-          <Agreement>
-            En cliquant sur <b>S'inscrire</b>, j'accepte que mes données soient
-            traitées en accord avec la <b>Politique de confidentialité</b>
-          </Agreement>
-          <Button>S'inscrire</Button>
+          <Link>Mot de passe oublié ?</Link>
+          <Button>Se connecter</Button>
         </Form>
       </Wrapper>
     </Container>
   );
 };
 
-export default Register;
+export default Login;
