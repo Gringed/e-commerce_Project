@@ -1,7 +1,12 @@
-import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
-import React from 'react'
-import styled from 'styled-components'
-import { mobile } from '../responsive';
+import {
+  FavoriteBorderOutlined,
+  SearchOutlined,
+  ShoppingCartOutlined,
+} from "@mui/icons-material";
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const PrimaryColor = "whitesmoke";
 const SecondaryColor = "pink";
@@ -17,7 +22,7 @@ const Container = styled.div`
   align-items: center;
   background: ${PrimaryColor};
   position: relative;
-  ${mobile({margin: "5px 0 5px 0"})}
+  ${mobile({ margin: "5px 0 5px 0" })}
 `;
 const Circle = styled.div`
   width: 200px;
@@ -25,14 +30,14 @@ const Circle = styled.div`
   border-radius: 50%;
   position: absolute;
   background: ${SecondaryColor};
-  opacity:0.5;
+  opacity: 0.5;
 `;
 const Image = styled.img`
-z-index: 2;
+  z-index: 2;
   height: 75%;
 `;
 const Info = styled.div`
-  width:100%;
+  width: 100%;
   height: 100%;
   position: absolute;
   left: 0;
@@ -44,14 +49,14 @@ const Info = styled.div`
   align-items: center;
   opacity: 0;
   transition: all 0.2s ease-in;
-  &:hover{
+  &:hover {
     opacity: 1;
   }
 `;
 const Icon = styled.div`
   width: 45px;
   height: 45px;
-  border-radius:50%;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,31 +64,41 @@ const Icon = styled.div`
   margin: 10px;
   transition: all 0.2s ease-in;
   cursor: pointer;
-  &:hover{
+  color: ${TertiaryColor};
+  &>a{
+      color: ${TertiaryColor};
+      display: contents;
+    }
+  &:hover {
     color: ${SecondaryColor};
     background: ${TertiaryColor};
     transform: scale(1.1);
+    &>a{
+      color: ${SecondaryColor};
+    }
   }
-  `;
+`;
 
-const Product = ({item}) => {
+const Product = ({ item }) => {
   return (
     <Container>
-        <Circle />
-          <Image src={item.img}/>
-          <Info>
-            <Icon>
-              <ShoppingCartOutlined />
-            </Icon>
-            <Icon>
-              <SearchOutlined />
-            </Icon>
-            <Icon>
-              <FavoriteBorderOutlined />
-            </Icon>
-          </Info>
+      <Circle />
+      <Image src={item.image} />
+      <Info>
+        <Icon>
+          <ShoppingCartOutlined />
+        </Icon>
+        <Icon>
+          <Link to={`/product/${item._id}`}>
+            <SearchOutlined />
+          </Link>
+        </Icon>
+        <Icon>
+          <FavoriteBorderOutlined />
+        </Icon>
+      </Info>
     </Container>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;

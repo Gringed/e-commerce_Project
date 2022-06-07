@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { categories } from "../data";
 import { mobile, tablet } from "../responsive";
@@ -75,15 +76,21 @@ const Button = styled.button`
 const Categories = () => {
   return (
     <Container>
+      
       {categories.map((item) => (
+        
         <Item key={item.id}>
+          <Link to={`/products/${item.category}#`}>
           <Image src={item.img} />
           <InfoContainer>
             <Title>{item.title}</Title>
             <Button>Voir plus</Button>
           </InfoContainer>
+          </Link>
         </Item>
+        
       ))}
+      
     </Container>
   );
 };

@@ -3,6 +3,8 @@ import { Badge } from '@mui/material';
 import React from "react";
 import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
+import {useSelector} from "react-redux"
+import { Link } from "react-router-dom";
 
 const PrimaryColor = "white";
 const SecondaryColor = "pink";
@@ -81,6 +83,14 @@ const MenuItem = styled.div`
     cursor: pointer;
     ${mobile({fontSize: "12px", marginLeft: "5px"})};
     ${tablet({fontSize: "13px", marginLeft: "10px"})};
+    transition: all 0.2s ease-in;
+    &>a{
+      color: ${PrimaryColor};
+      transition: all 0.2s ease-in;
+      &:hover{
+        color: ${SecondaryColor};
+      }
+    }
     &:hover {
         color: ${SecondaryColor};
     }
@@ -88,6 +98,8 @@ const MenuItem = styled.div`
 `
 
 const Navbar = () => {
+  const quantity = useSelector(state => state.cart.quantity)
+  
   return (
     <Container>
       <Wrapper>
@@ -103,17 +115,24 @@ const Navbar = () => {
         </Center>
         <Right>
         <MenuItem>
+        <Link to="/register">
             Register
+            </Link>
         </MenuItem>
         <MenuItem>
+        <Link to="/login">
             Login
+            </Link>
         </MenuItem>
+        
         <MenuItem>
-        <Badge badgeContent={4} color="error">
+        <Link to="/cart">
+        <Badge badgeContent={quantity} color="error">
             <ShoppingCartOutlined />
           </Badge>
+          </Link>
         </MenuItem>
-          
+        
         </Right>
       </Wrapper>
     </Container>

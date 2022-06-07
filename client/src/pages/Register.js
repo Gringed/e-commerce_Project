@@ -106,7 +106,7 @@ const Register = () => {
         Mooney | <Span>Inscription</Span>
       </Logo>
       <Wrapper>
-        <Title>Inscription | <Connexion href="">Se connecter</Connexion></Title>
+        <Title>Inscription | <Connexion href="/login">Se connecter</Connexion></Title>
         <Form>
           <Input placeholder="Prénom" />
           <Input placeholder="Nom" />

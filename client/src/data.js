@@ -27,17 +27,20 @@ export const categories = [
     {
         id: 1,
         img: "https://cdn.shopify.com/s/files/1/0267/4049/0349/products/b7e408d813ec570725b1389663910f9e_1024x1024.jpg?v=1580117243",
-        title: "Vestes",
+        title: "Hauts",
+        category: "hauts"
     },
     {
         id: 2,
         img: "https://www.espace-des-marques.com/248619-EDMFormat/pantalon-cargo-homme-kaki-deeluxe-barkley.jpg",
-        title: "Pantalons",
+        title: "Bas",
+        category: "bas"
     },
     {
         id: 3,
         img: "https://www.albert-kreuz.fr/out/pictures/master/product/1/112200-bc_1-ausschnitt(1).jpg",
         title: "Sous vêtements",
+        category: "Sous_vetements"
     }
 ]
 

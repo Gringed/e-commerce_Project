@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { login } from "../redux/apiCalls";
 import { laptopS, mobile, tablet } from "../responsive";
 
 const PrimaryColor = "whitesmoke";
@@ -21,16 +23,16 @@ const Wrapper = styled.div`
   width: 30%;
   padding: 20px;
   background: ${PrimaryColor};
-  ${mobile({width: "80%"})}
-  ${tablet({width: "70%"})}
-  ${laptopS({width: "55%"})}
+  ${mobile({ width: "80%" })}
+  ${tablet({ width: "70%" })}
+  ${laptopS({ width: "55%" })}
 `;
 const Logo = styled.h1`
   color: ${PrimaryColor};
   border-bottom: 5px solid ${SecondaryColor};
   font-size: 40px;
   width: fit-content;
-  ${mobile({fontSize: "25px", textAlign: "center"})}
+  ${mobile({ fontSize: "25px", textAlign: "center" })}
 `;
 
 const Span = styled.span`
@@ -43,6 +45,18 @@ const Title = styled.h1`
   font-size: 25px;
   color: ${SecondaryColor};
   width: fit-content;
+`;
+const Inscription = styled.a`
+  color: ${TertiaryColor};
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease-in;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    color: ${SecondaryColor};
+    font-size: 25px;
+  }
 `;
 const Form = styled.form`
   display: flex;
@@ -76,6 +90,10 @@ const Button = styled.button`
     background: ${TertiaryColor};
     border: 2px solid ${TertiaryColor};
   }
+  &:disabled{
+    cursor: not-allowed;
+    color: transparent;
+  }
 `;
 
 const Link = styled.a`
@@ -92,20 +110,24 @@ const Link = styled.a`
   }
 `;
 
-const Inscription = styled.a`
+const Error = styled.span`
   color: ${TertiaryColor};
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease-in;
-  font-size: 20px;
-  cursor: pointer;
-  &:hover {
-    color: ${SecondaryColor};
-    font-size: 25px;
-  }
-`;
+  padding: 20px 10px;
+  background: #ff000091;
+  font-size: 14px;
+`
+
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch()
+  const {isFetching, error} = useSelector(state=>state.user)
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login(dispatch, {email, password})
+  }
   return (
     <Container>
       <Logo>
@@ -113,13 +135,24 @@ const Login = () => {
       </Logo>
       <Wrapper>
         <Title>
-          Connexion | <Inscription>Créer un compte</Inscription>
+          Connexion | <Inscription href="/register">Créer un compte</Inscription>
         </Title>
         <Form>
-          <Input placeholder="E-mail" type="email" required />
-          <Input placeholder="Mot de passe" type="password" />
+          <Input
+            placeholder="E-mail"
+            type="email"
+            required={true}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            placeholder="Mot de passe"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
           <Link>Mot de passe oublié ?</Link>
-          <Button>Se connecter</Button>
+          {error ? <Error>E-mail ou mot de passe incorrect</Error> : null}
+          
+          <Button onClick={handleLogin} disabled={isFetching}>Se connecter</Button>
         </Form>
       </Wrapper>
     </Container>

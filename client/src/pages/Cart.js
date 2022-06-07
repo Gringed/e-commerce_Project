@@ -1,9 +1,15 @@
 import { Add, Remove } from "@mui/icons-material";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile, tablet } from "../responsive";
+import StripeCheckout from "react-stripe-checkout";
+import { userRequest } from "../requestMethod";
+import { useNavigate } from "react-router-dom";
+
+const KEY = process.env.REACT_APP_STRIPE;
 
 const PrimaryColor = "whitesmoke";
 const SecondaryColor = "pink";
@@ -159,6 +165,28 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  const [stripeToken, setStripeToken] = useState(null);
+  const history = useNavigate();
+
+  const onToken = (token) => {
+    setStripeToken(token);
+  }
+  useEffect(() => {
+      const makeRequest = async () => {
+        try {
+          const res = await userRequest.post("/checkout/payment", {
+            tokenId:stripeToken.id,
+            amount:cart.total*100,
+            
+          })
+          history("/success", {state:{data:res.data}})
+        } catch (error) {
+          
+        }
+      }
+      stripeToken && makeRequest();
+  }, [stripeToken, cart.total, history])
   return (
     <Container>
       <Navbar />
@@ -174,66 +202,42 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            <Product>
-              <ProductDetails>
-                <Image src="https://www.seva.bzh/wp-content/uploads/2021/01/t-shirt-personnalisable-beige-since-seva-1.png" />
-                <Details>
-                  <ProductName>
-                    <b>Produit</b> : T-shirt Beige
-                  </ProductName>
-                  <ProductID>
-                    <b>ID</b> : 01258745
-                  </ProductID>
-                  <ProductColor color="bisque" />
-                  <ProductSize>
-                    <b>Taille</b> : S
-                  </ProductSize>
-                </Details>
-              </ProductDetails>
-              <PriceDetails>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>25 €</ProductPrice>
-              </PriceDetails>
-            </Product>
+          {cart.products.map((product) => (
+              <Product key={product._id}>
+                <ProductDetails>
+                  <Image src={product.image} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductID>
+                      <b>ID:</b> {product._id}
+                    </ProductID>
+                    <ProductColor color={product.color} />
+                    <ProductSize>
+                      <b>Size:</b> {product.size}
+                    </ProductSize>
+                  </Details>
+                </ProductDetails>
+                <PriceDetails>
+                  <ProductAmountContainer>
+                    <Add />
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                    <Remove />
+                  </ProductAmountContainer>
+                  <ProductPrice>
+                    $ {product.price * product.quantity}
+                  </ProductPrice>
+                </PriceDetails>
+              </Product>
+            ))}
             <Hr />
-            <Product>
-              <ProductDetails>
-                <Image src="https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png" />
-                <Details>
-                  <ProductName>
-                    <b>Produit</b> : Sac à main
-                  </ProductName>
-                  <ProductID>
-                    <b>ID</b> : 04649823
-                  </ProductID>
-                  <Colors>
-                    <ProductColor color="beige" />
-                    <ProductColor color="#16a512" />
-                  </Colors>
-                  <ProductSize>
-                    <b>Taille</b> : Unique
-                  </ProductSize>
-                </Details>
-              </ProductDetails>
-              <PriceDetails>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>36 €</ProductPrice>
-              </PriceDetails>
-            </Product>
           </Info>
           <Summary>
               <SummaryTitle>Récapitulatif de la commande</SummaryTitle>
               <SummaryItem>
                   <SummaryItemText>Sous - total</SummaryItemText>
-                  <SummaryItemPrice>61 €</SummaryItemPrice>
+                  <SummaryItemPrice>{cart.total} €</SummaryItemPrice>
               </SummaryItem>
               <SummaryItem>
                   <SummaryItemText>Frais de livraison</SummaryItemText>
@@ -245,9 +249,20 @@ const Cart = () => {
               </SummaryItem>
               <SummaryItem type="important">
                   <SummaryItemText>Total</SummaryItemText>
-                  <SummaryItemPrice>66 €</SummaryItemPrice>
+                  <SummaryItemPrice>{cart.total} €</SummaryItemPrice>
               </SummaryItem>
-              <Button>Procéder au paiement</Button>
+              <StripeCheckout
+                name="Mooney"
+                image="https://png.pngtree.com/png-clipart/20191027/ourlarge/pngtree-payment-icon-png-image_1842637.jpg"
+                billingAddress
+                shippingAddress
+                description={`Total de la commande : ${cart.total}€`}
+                amount={cart.total*100}
+                token={onToken}
+                stripeKey={KEY}
+              >
+                {cart.total === 0 ? <Button disabled>Commander maintenant</Button> : <Button>Commander maintenant</Button>}
+              </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
