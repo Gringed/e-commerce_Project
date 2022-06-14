@@ -1,9 +1,9 @@
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
-import { Badge } from '@mui/material';
+import { Badge } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const PrimaryColor = "white";
@@ -21,20 +21,19 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   text-transform: uppercase;
-  ${mobile({padding: "10px 5px"})}
+  ${mobile({ padding: "10px 5px" })}
 `;
 
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  ${mobile({display: "none"})}
+  ${mobile({ display: "none" })}
 `;
 
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
-  
 `;
 const SearchContainer = styled.div`
   display: flex;
@@ -47,9 +46,9 @@ const SearchContainer = styled.div`
 const Input = styled.input`
   border: none;
   padding: 10px;
-  font-family: 'Montserrat', sans-serif;
-  background:none;
-  ${tablet({width: "70px"})}
+  font-family: "Montserrat", sans-serif;
+  background: none;
+  ${tablet({ width: "70px" })}
   color: ${PrimaryColor};
   &:focus {
     outline: none;
@@ -60,14 +59,21 @@ const Center = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  ${mobile({justifyContent: "flex-start"})}
+  ${mobile({ justifyContent: "flex-start" })}
 `;
 
 const Logo = styled.h1`
-  color: ${PrimaryColor};
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
   border-bottom: 5px solid ${SecondaryColor};
-  ${mobile({fontSize: "20px", marginLeft: "10px"})}
-  ${tablet({fontSize: "23px", marginLeft: "10px"})}
+  ${mobile({ fontSize: "20px", marginLeft: "10px" })}
+  ${tablet({ fontSize: "23px", marginLeft: "10px" })}
+  &>a {
+    text-decoration: none;
+    color: ${PrimaryColor};
+  }
 `;
 const Right = styled.div`
   flex: 1;
@@ -75,64 +81,60 @@ const Right = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  ${mobile({justifyContent: "space-around", flex: "2"})}
+  ${mobile({ justifyContent: "space-around", flex: "2" })}
 `;
 const MenuItem = styled.div`
-    font-size: 14px;
-    margin-left: 25px;
-    cursor: pointer;
-    ${mobile({fontSize: "12px", marginLeft: "5px"})};
-    ${tablet({fontSize: "13px", marginLeft: "10px"})};
+  font-size: 14px;
+  margin-left: 25px;
+  cursor: pointer;
+  ${mobile({ fontSize: "12px", marginLeft: "5px" })};
+  ${tablet({ fontSize: "13px", marginLeft: "10px" })};
+  transition: all 0.2s ease-in;
+  & > a {
+    color: ${PrimaryColor};
     transition: all 0.2s ease-in;
-    &>a{
-      color: ${PrimaryColor};
-      transition: all 0.2s ease-in;
-      &:hover{
-        color: ${SecondaryColor};
-      }
-    }
     &:hover {
-        color: ${SecondaryColor};
+      color: ${SecondaryColor};
     }
-    
-`
+  }
+  &:hover {
+    color: ${SecondaryColor};
+  }
+`;
 
 const Navbar = () => {
-  const quantity = useSelector(state => state.cart.quantity)
-  
+  const quantity = useSelector((state) => state.cart.quantity);
+
   return (
     <Container>
       <Wrapper>
         <Left>
           <Language>EN</Language>
           <SearchContainer>
-            <Input type={"text"} placeholder="Rechercher . ."/>
+            <Input type={"text"} placeholder="Rechercher . ." />
             <Search />
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>Mooney</Logo>
+          <Logo>
+            <Link to="/">Mooney</Link>
+          </Logo>
         </Center>
         <Right>
-        <MenuItem>
-        <Link to="/register">
-            Register
+          <MenuItem>
+            <Link to="/register">Register</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/login">Login</Link>
+          </MenuItem>
+
+          <MenuItem>
+            <Link to="/cart">
+              <Badge badgeContent={quantity} color="error">
+                <ShoppingCartOutlined />
+              </Badge>
             </Link>
-        </MenuItem>
-        <MenuItem>
-        <Link to="/login">
-            Login
-            </Link>
-        </MenuItem>
-        
-        <MenuItem>
-        <Link to="/cart">
-        <Badge badgeContent={quantity} color="error">
-            <ShoppingCartOutlined />
-          </Badge>
-          </Link>
-        </MenuItem>
-        
+          </MenuItem>
         </Right>
       </Wrapper>
     </Container>
